@@ -1,22 +1,20 @@
-import React from 'react';
+import React, {useReducer} from 'react';
 import './App.css';
 
+import CalculatorBoard from './CalculatorBoard';
+import Context from "./components/Context";
+import { initialAppState, reducer } from "./reducers";
+
 function App() {
+  const [state, dispatch] = useReducer(reducer, initialAppState);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React!!!!!!!!!!!!!!!!
-        </a>
-      </header>
+      <div>
+        <Context.Provider value={{ state, dispatch }}>
+          <CalculatorBoard />
+        </Context.Provider>
+      </div>
     </div>
   );
 }
